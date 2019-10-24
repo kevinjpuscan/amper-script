@@ -1,0 +1,5 @@
+APP_NAME='Amper Script'
+APP_VERSION='1.0'
+
+API_AMPER_URL=''
+API_AMPER_TOKEN=''
