@@ -1,6 +1,7 @@
 
 import os
 import psycopg2
+import serial,time
 from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
@@ -11,9 +12,26 @@ dbPort=os.getenv('DB_PORT')
 dbUser=os.getenv('DB_USER')
 dbPass=os.getenv('DB_PASS')
 
+serialPort=os.getenv('SERIAL_PORT')
+
+
 
 def getDataSensor():
-    return 10.1
+    arduinoPort = serial.Serial(serialPort, 9600, timeout=1)
+    time.sleep(2)
+
+    print('get discart value')
+    arduinoPort.write('b'.encode())
+    valueInput = arduinoPort.readline().decode()
+    print('corriente:'+valueInput)
+
+    print('get value')
+    arduinoPort.write('b'.encode())
+    valueInput = arduinoPort.readline().decode()
+    print('corriente:'+valueInput)
+
+    arduinoPort.close()
+    return valueInput
 
 def saveValue(value):
     conn = psycopg2.connect(database=dbName,user=dbUser,password=dbPass, host=dbHost)
