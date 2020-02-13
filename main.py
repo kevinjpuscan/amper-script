@@ -20,15 +20,16 @@ def getDataSensor():
     arduinoPort = serial.Serial(serialPort, 9600, timeout=1)
     time.sleep(2)
 
-    print('get discart value')
+    #print('get discart value')
     arduinoPort.write('b'.encode())
     valueInput = arduinoPort.readline().decode()
-    print('corriente:'+valueInput)
 
-    print('get value')
-    arduinoPort.write('b'.encode())
-    valueInput = arduinoPort.readline().decode()
-    print('corriente:'+valueInput)
+    for i in range(6):
+        arduinoPort.write('b'.encode())
+        valueInput = arduinoPort.readline().decode()
+        saveValue(valueInput)
+        if(i!=5):
+            time.sleep(10)
 
     arduinoPort.close()
     return valueInput
@@ -47,6 +48,6 @@ def saveValue(value):
             
 
 if __name__ == '__main__':
-    watt = getDataSensor()
-    saveValue(watt)
+    getDataSensor()
+
     
