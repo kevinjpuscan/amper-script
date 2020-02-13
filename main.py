@@ -30,6 +30,11 @@ def getDataSensor():
         saveValue(valueInput)
         if(i!=5):
             time.sleep(10)
+        else:
+            time.sleep(8)  
+            arduinoPort.write('b'.encode())
+            valueInput = arduinoPort.readline().decode()
+            saveValue(valueInput)  
 
     arduinoPort.close()
     return valueInput
