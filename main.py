@@ -44,7 +44,7 @@ def saveValue(value):
     if(conn):
             cur.close()
             conn.close()
-            print("PostgreSQL connection is closed")
+            #print("PostgreSQL connection is closed")
             
 
 if __name__ == '__main__':
